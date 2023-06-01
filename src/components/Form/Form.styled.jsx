@@ -49,6 +49,7 @@ export const Btn = styled.button`
   font-weight: 600;
   border: 1px solid #cacaca;
   border-radius: 4px;
+
   transition: background 50ms linear;
 
   &:active {
