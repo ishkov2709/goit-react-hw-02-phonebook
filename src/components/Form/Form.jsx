@@ -1,5 +1,6 @@
 import React from 'react';
 import { LabelValue, Btn, FormField, Label, Input } from './Form.styled';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component {
   state = {
@@ -66,3 +67,7 @@ class Form extends React.Component {
 }
 
 export default Form;
+
+Form.propTypes = {
+  addContact: PropTypes.func,
+};

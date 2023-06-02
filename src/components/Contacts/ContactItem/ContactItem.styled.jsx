@@ -1,17 +1,34 @@
 import styled from '@emotion/styled';
 
 export const Item = styled.li`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 22px;
   text-align: center;
 
   &:not(:last-child) {
     margin-bottom: 8px;
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: -10%;
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #000000;
+    border-radius: 50%;
+  }
 `;
 
 export const Text = styled.p`
-  display: inline-block;
-  margin: 0 50px 0 0;
+  display: block;
+  font-size: 20px;
+  margin: 0 auto 0 0;
 `;
 
 export const Btn = styled.button`

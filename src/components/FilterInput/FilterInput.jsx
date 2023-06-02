@@ -1,4 +1,5 @@
 import { Input } from './FilterInput.styled';
+import PropTypes from 'prop-types';
 
 const FilterInput = props => {
   const { onChange } = props;
@@ -10,3 +11,7 @@ const FilterInput = props => {
 };
 
 export default FilterInput;
+
+FilterInput.propTypes = {
+  onChange: PropTypes.func,
+};
