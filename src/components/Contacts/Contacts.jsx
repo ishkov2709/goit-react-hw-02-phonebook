@@ -2,38 +2,23 @@ import { List } from './Contacts.styled';
 import ContactItem from './ContactItem';
 import PropTypes from 'prop-types';
 
-const Contacts = props => {
-  const { contacts, filter, filterContacts, deleteContact } = props;
+const Contacts = ({ contacts, deleteContact }) => {
   return (
     <>
       {contacts.length > 0 && (
-        <>
-          <List>
-            {filter
-              ? filterContacts(filter, contacts).map(({ id, name, number }) => {
-                  return (
-                    <ContactItem
-                      key={id}
-                      id={id}
-                      name={name}
-                      number={number}
-                      deleteContact={e => deleteContact(e)}
-                    />
-                  );
-                })
-              : contacts.map(({ id, name, number }) => {
-                  return (
-                    <ContactItem
-                      key={id}
-                      id={id}
-                      name={name}
-                      number={number}
-                      deleteContact={e => deleteContact(e)}
-                    />
-                  );
-                })}
-          </List>
-        </>
+        <List>
+          {contacts.map(({ id, name, number }) => {
+            return (
+              <ContactItem
+                key={id}
+                id={id}
+                name={name}
+                number={number}
+                deleteContact={deleteContact}
+              />
+            );
+          })}
+        </List>
       )}
     </>
   );
@@ -49,7 +34,5 @@ Contacts.propTypes = {
       number: PropTypes.string,
     })
   ),
-  filter: PropTypes.string,
-  filterContacts: PropTypes.func,
   deleteContact: PropTypes.func,
 };

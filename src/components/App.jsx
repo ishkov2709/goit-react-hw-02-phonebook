@@ -10,15 +10,15 @@ export class App extends React.Component {
     filter: '',
   };
 
-  addContact(name, number) {
+  addContact = (name, number) => {
     if (this.state.contacts.find(el => el.name === name)) {
       return alert(`${name} is already in contacts`);
-    } else {
-      this.setState({
-        contacts: [{ id: nanoid(), name, number }, ...this.state.contacts],
-      });
     }
-  }
+
+    this.setState({
+      contacts: [{ id: nanoid(), name, number }, ...this.state.contacts],
+    });
+  };
 
   contactsFilterHandler = e => {
     const { name, value } = e.currentTarget;
@@ -26,20 +26,21 @@ export class App extends React.Component {
     this.setState({ [name]: value });
   };
 
-  filterContacts(filter, contacts) {
+  filterContacts() {
+    const { contacts, filter } = this.state;
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
     );
   }
 
-  deleteContact = e => {
-    const { id } = e.currentTarget.parentNode;
+  deleteContact = id => {
     this.setState(prevState => {
       return { contacts: prevState.contacts.filter(el => el.id !== id) };
     });
   };
 
   render() {
+    const filteredContacts = this.filterContacts();
     return (
       <div
         style={{
@@ -52,11 +53,7 @@ export class App extends React.Component {
       >
         <div>
           <h1>Phonebook</h1>
-          <Form
-            addContact={(a, b) => {
-              this.addContact(a, b);
-            }}
-          />
+          <Form addContact={this.addContact} />
 
           <h2>Contacts</h2>
           <h3>Find contact by name</h3>
@@ -66,10 +63,8 @@ export class App extends React.Component {
             }}
           />
           <Contacts
-            contacts={this.state.contacts}
-            filter={this.state.filter}
-            filterContacts={(a, b) => this.filterContacts(a, b)}
-            deleteContact={e => this.deleteContact(e)}
+            contacts={filteredContacts}
+            deleteContact={this.deleteContact}
           />
         </div>
       </div>
